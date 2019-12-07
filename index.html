@@ -39,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">COMP3009</a>
+          <a class="brand" href="#">COMP6035</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <!--<li class="active"><a href="#">Home</a></li>
@@ -53,22 +53,45 @@
 
     <div class="container">
 
-        <h1>From Aspect Oriented Programming to Code Generation</h1>
-        <h2> -- Programs That Write Programs</h2>
-		<p>Module Leader Mirco</p>
-		<p>The notes page describes this course as: 
+        <h1>Bounded Integer Division</h1>
+        <h3>A Tale of Woe -- By Edward Seabrook</h3>
 
-		<blockquote>
-		</blockquote>
-		</p>
-		
-
-	<h2>Lecture 1 - Introduction</h2>
-
-
-	<hr>
-	<p>This page was aggregated by Edward Seabrook - 2013</p>
-
+        <p>The <a href="https://secure.ecs.soton.ac.uk/notes/comp6035/Assignment2-TemplateMetaprogramming.pdf">
+        second coursework</a> for Aspect Oriented Programming requires us to use
+        C++ Template Meta-programming, to build a set of templates that allow
+        their user to write expressions that are evaluated at runtime.  For
+        example, the expression:
+        <blockquote>
+            x + (x-2) * (x-3) 
+        </blockquote>
+        could be written as:
+        <blockquote> 
+            ADD&lt;X, MULT&lt;SUB&lt;X, LIT&lt;2&gt; &gt;, SUB&lt;X, LIT&lt;3&gt; &gt; &gt; &gt; Expr; 
+        </blockquote>
+        </p>
+        <p>The second question of the coursework requires this to be extended to offer bounds on the inputs. 
+        <blockquote>
+            0 &le; x &le; 5 
+        </blockquote>
+        is written as:
+        <blockquote>
+            X&lt;BOUNDS&lt;0,5&gt; &gt; x;
+        </blockquote>
+        </p>
+        <p>The aim of this is to allow bounds to be created over the whole
+        expression, the example given is for addition and multiplication: 
+        <blockquote>
+            Consider a sample expression with a variable that carries these bounds:<br /> <br />
+            (x_{0,5} + 3) * ( x_{0,5} + 5) <br /><br />
+            Then we can calculate the bounds on the whole expression above as follows: <br /><br />
+            3 &le; x_{0,5} + 3 &le; 8 and 5 &le; x_{0,5} + 5 &le; 10 <br /><br />
+            Consequently we have that <br /><br />
+            15 &le; ( x_{0,5} + 3 ) * ( x_{0,5} + 5 ) &le; 80 <br /><br />
+        </blockquote>
+        This example is trivial to implement. The bounds for each subexpression
+        are simply passed to their parents, and the bounds for the expressions
+        are calculated. This also holds for subtraction.  
+            
     </div> <!-- /container -->
 
     <!-- Le javascript
